@@ -1,0 +1,9 @@
+target
+.project
+.classpath
+.settings
+.DS_Store
+bin
+output
+velocity.log
+velocity.log.*
