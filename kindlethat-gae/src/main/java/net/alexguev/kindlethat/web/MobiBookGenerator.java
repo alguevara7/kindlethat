@@ -18,13 +18,14 @@ import java.util.UUID;
 import net.alexguev.kindlethat.core.SizeAwareResource;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
 class MobiBookGenerator {
 	
-	private final Logger log = Logger.getLogger(getClass());
+	private static final Logger LOGGER = LoggerFactory.getLogger(MobiBookGenerator.class);
 	
 	SizeAwareResource generate(MobiBook book) {
 		File outputFolder = createOutputFolder(book.getTitle());
@@ -64,7 +65,7 @@ class MobiBookGenerator {
 			File toc = writeToc(parts, outputFolder);
 			return writeOpf(book.getTitle(), parts, toc, outputFolder);
 		} catch (Exception e) {
-			this.log.error("Unable to write OPF file for " + book, e);
+			LOGGER.error("Unable to write OPF file for " + book, e);
 			throw new RuntimeException(e);
 		}
 	}
@@ -112,7 +113,7 @@ class MobiBookGenerator {
 			try {
 				files.add(writePart(part, outputFolder));
 			} catch (IOException e) {
-				this.log.error("Unable to write part: " + part, e);
+				LOGGER.error("Unable to write part: " + part, e);
 			}
 		}
 		return files;

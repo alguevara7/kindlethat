@@ -2,6 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>kindlethat-parent</artifactId>
+		<groupId>net.alexguev.kindlethat</groupId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
 
     <!-- The Basics -->
     <groupId>net.alexguev.kindlethat</groupId>
@@ -21,12 +26,6 @@
 		    <version>3.0.1.RELEASE</version>
 		</dependency>
 
-		<dependency>
-		    <groupId>log4j</groupId>
-		    <artifactId>log4j</artifactId>
-		    <version>1.2.15</version>
-		</dependency>	
-		
 		<dependency>
 		    <groupId>velocity</groupId>
 		    <artifactId>velocity</artifactId>
@@ -132,21 +131,17 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.5.6</version>
         </dependency>
 
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>0.9.15</version>
         </dependency>
 
         <!-- Test scope -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.7</version>
-            <scope>test</scope>
         </dependency>
 
         <!--
@@ -177,8 +172,6 @@
 		<dependency>
 		    <groupId>org.mockito</groupId>
 		    <artifactId>mockito-core</artifactId>
-		    <version>1.8.4</version>
-		    <scope>test</scope>
 		</dependency>        
 		
 		<dependency>
@@ -330,6 +323,10 @@
         		<artifactId>maven-eclipse-plugin</artifactId>
         		<configuration>
         			<outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>
+					<classpathContainers>
+					   <classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER</classpathContainer>
+					   <classpathContainer>com.google.appengine.eclipse.core.GAE_CONTAINER</classpathContainer>
+					</classpathContainers> 
         		</configuration>            
             </plugin>
         </plugins>
@@ -338,13 +335,6 @@
     
     <!-- Specify hard-coded project properties here -->
     <properties>
-        <!--
-�            This is just for "eclipse:eclipse" goal to always attempt
-            downloading sources
-≈y
-        -->
-        <downloadSources>true</downloadSources>
-
         <!--
             Specify AppEngine version for your project. It should match
             SDK version pointed to by ${gae.home} property (Typically,

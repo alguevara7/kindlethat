@@ -1,16 +1,17 @@
 package net.alexguev.kindlethat.web;
 
-import org.apache.log4j.Logger;
 import org.htmlparser.Parser;
 import org.htmlparser.Tag;
 import org.htmlparser.Text;
 import org.htmlparser.util.NodeList;
 import org.htmlparser.util.ParserException;
 import org.htmlparser.visitors.NodeVisitor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 class WebPage {
 
-    private final Logger logger = Logger.getLogger(this.getClass());
+	private static final Logger LOGGER = LoggerFactory.getLogger(WebPage.class);
 
     private String title;
     private final String content;
@@ -24,7 +25,7 @@ class WebPage {
         try {
             this.doParse();
         } catch (ParserException e) {
-            this.logger.error(String.format("Unable to parse %s", this.content), e);
+            LOGGER.error(String.format("Unable to parse %s", this.content), e);
         }
     }
 
